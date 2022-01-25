@@ -1,0 +1,11 @@
+.THIS.board {
+
+    background: #f7fafc ;
+    position: relative;
+}
+
+.THIS .win-word{ /* There is a space between THIS and win-word because win-word IS NOT A DIRECT CHILD of the Aura Component. Span is a child of a div*/
+
+    text-transform: uppercase ;
+    font-weight: bold;
+}
