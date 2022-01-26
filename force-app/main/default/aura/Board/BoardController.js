@@ -24,5 +24,27 @@
 
     doRender : function(component, event, helper) {
         console.log("Render completed") ;
+    },
+
+    blockClickHandler : function(component, event, helper) {
+        //get event value
+
+        const value = event.getParam("value") ;
+        let clickCount = component.get("v.clickCount") + 1; //update click Count 
+        if ( value === component.get("v.winWord")) {
+            //user has won
+            component.set("v.result", "YOU WIN") ;
+            helper.disableBoard(component) ;
+        }
+
+        else if ( clickCount === 3 ) {
+            //user lose
+            component.set("v.result", "YOU LOSE") ;
+            console.log("You lose!");
+            helper.disableBoard(component) ;
+        }
+
+        component.set("v.clickCount", clickCount) ;
+
     }
 })

@@ -26,5 +26,16 @@
         const randomIndex = Math.floor(Math.random() * arr.length) ;
         return arr[randomIndex] ;
 
+    },
+
+    disableBoard : function(component) {
+        
+        component.set("v.boardDisabled",true) ;
+
+    },
+
+    enableBoard : function(component) {
+
+        component.set("v.boardDisabled",false) ;
     }
 })
