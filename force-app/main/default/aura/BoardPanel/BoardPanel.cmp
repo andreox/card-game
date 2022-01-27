@@ -1,4 +1,4 @@
-<aura:component implements="flexipage:availableForAllPageTypes">
+<aura:component implements="flexipage:availableForAllPageTypes" controller="BoardPanelController">
 
     <aura:attribute name="modes" type="List" default="[
         {'label' : 'Easy', 'value': 'Easy'},
@@ -7,6 +7,9 @@
         ]" />
 
     <aura:attribute name="selectedMode" type="String" />
+    <aura:attribute name="reshuffleDisabled" type="Boolean" default="true" />
+    <aura:handler event="c:ResultApplicationEvent" action="{!c.onResultHandler}"></aura:handler>
+
     <lightning:card title = "Word Shuffle">  
         <lightning:layout horizontalAlign="center" multipleRows="true">
             <lightning:layoutItem padding="around-small"> 
@@ -25,14 +28,14 @@
             </lightning:layoutItem>
 
             <lightning:layoutItem padding="around-small">
-                <lightning:button variant="neutral" label="Reshuffle" title="Reshuffle" onclick="{!c.reshuffleBoard}" />
+                <lightning:button variant="neutral" label="Reshuffle" title="Reshuffle" disabled="{!v.reshuffleDisabled}" onclick="{!c.reshuffleBoard}" />
             </lightning:layoutItem>
 
             
             <aura:if isTrue="{! (v.selectedMode != null) }">
                 <!-- Comunicate with Board component : -->
                 <lightning:layoutItem size="12" padding="around-small">
-                    <c:Board mode="{!v.selectedMode}"> <!-- I CAN DO THIS BECAUSE mode ATTRIBUTE IN Board IS PUBLIC!-->
+                    <c:Board aura:id="boardComp" mode="{!v.selectedMode}"> <!-- I CAN DO THIS BECAUSE mode ATTRIBUTE IN Board IS PUBLIC!-->
                     </c:Board>
                 </lightning:layoutItem>
             </aura:if>
